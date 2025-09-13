@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16
+    container_name: my_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: scti-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./depersonalized_bk.sql:/docker-entrypoint-initdb.d/depersonalized_bk.sql:ro
